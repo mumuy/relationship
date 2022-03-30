@@ -1718,8 +1718,13 @@
         }
         var from_selectors = getSelectors(options.text);
         var to_selectors = getSelectors(options.target);
-        if(!to_selectors.length){
-            to_selectors = [''];
+        if (from_selectors.length || to_selectors.length) {
+            if(!from_selectors.length){
+                from_selectors = [''];
+            }
+            if(!to_selectors.length){
+                to_selectors = [''];
+            }
         }
         // console.log('[selectors]',from_selectors,to_selectors);
         var result = [];                            //匹配结果
