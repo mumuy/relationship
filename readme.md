@@ -5,7 +5,7 @@
 “中国家庭称谓计算器”为你避免了这种尴尬，只需简单的输入即可算出称谓。输入框兼容了不同的叫法，你可以称呼父亲为：“老爸”、“爹地”、“老爷子”等等，方面不同地域的习惯叫法。快捷输入按键，只需简单的点击即可完成关系输入，算法还支持逆向查找称呼哦～！
 
 
-演示地址：[https://passer-by.com/relationship/](http://passer-by.com/relationship/ )
+演示地址：[https://passer-by.com/relationship/](http://passer-by.com/relationship/)
 
 借助这套算法结合vue开发的APP: [https://passer-by.com/relationship/vue/](http://passer-by.com/relationship/vue/)
 
@@ -36,12 +36,12 @@ var relationship = require("relationship.js");
 
 ```js
 var options = {
-	text:'',		    //输入文本(称谓的汉字表达，称谓间用‘的’字分隔)
-	target:'',	    	//针对对象：空表示自己
-	sex:-1,			    //自己的性别：0女性,1男性
-	type:'default',		//转换类型：'default'算称谓,'chain'算关系
+	text:'',		//目标对象：目标对象的称谓汉字表达，称谓间用‘的’字分隔
+	target:'',	    	//相对对象：相对对象的称谓汉字表达，称谓间用‘的’字分隔，空表示自己
+	sex:-1,			//本人性别：0表示女性,1表示男性
+	type:'default',		//转换类型：'default'计算称谓,'chain'计算关系
 	reverse:false,		//称呼方式：true对方称呼我,false我称呼对方
-	mode:'default'		//模式选择，可由用户自定义
+	mode:'default'		//模式选择：使用setMode方法定制不同地区模式，在此选择自定义模式
 };
 ```
 
@@ -93,7 +93,7 @@ npm run build
 npm test
 ```
 
-当然也可以直接浏览器打开 `index.html` 来在查看网页demo。
+直接浏览器打开 `index.html` 来在查看网页demo 或 访问[亲戚称呼计算器项目演示](https://passer-by.com/relationship/)
 
 
 ## 四、关于分歧
@@ -103,7 +103,7 @@ npm test
 * 大爷：北方指父亲的哥哥，这里指爷爷的哥哥
 * 太太：一些地方指年长的妇人，这里指自己的妻子
 
-针对不同地区的使用，你可以通过上述所说的自定义模式实现。
+针对不同地区的使用习惯差异，你可以通过上述所说的自定义模式定制更符合自己习惯的版本。
 
 ## 五、其他
 
