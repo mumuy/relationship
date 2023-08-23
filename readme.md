@@ -152,7 +152,7 @@ http://www.ip138.com/chengwei/
 http://qinshu.supfree.net/
 
 tol在线工具
-https://tol.vip/
+https://tol.vip/relationship
 
 有道语文达人
 http://dict.youdao.com/k12yuwen/html/relation.html
