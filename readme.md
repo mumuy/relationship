@@ -151,8 +151,8 @@ http://www.ip138.com/chengwei/
 在线查询网
 http://qinshu.supfree.net/
 
-在线工具
-http://www.atool.org/relateship.php
+tol在线工具
+https://tol.vip/
 
 有道语文达人
 http://dict.youdao.com/k12yuwen/html/relation.html
