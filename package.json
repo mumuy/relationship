@@ -17,6 +17,7 @@
     "module": "./dist/relationship.min.mjs",
     "types": "./dist/relationship.d.ts",
     "exports": {
+        "types": "./dist/relationship.d.ts",
         "default": "./dist/relationship.min.js",
         "import": "./dist/relationship.min.mjs"
     },
