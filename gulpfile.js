@@ -13,9 +13,11 @@ gulp.task('localization', () => {
         'dist/relationship.min.mjs',
         'dist/relationship-mode.min.js',
         'dist/relationship-mode.min.mjs',
+        'dist/relationship.d.ts',
     ]).pipe(cht())
     .pipe(rename(function(path) {
-        path.basename = path.basename.replace('.min','.zh-HK.min');
+        console.log('path', path)
+        path.basename = path.basename.replace('.min','.zh-HK.min').replace(".d", '.zh-HK.d');
     }))
     .pipe(gulp.dest('dist/lang/'))
 });
