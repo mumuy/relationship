@@ -32,7 +32,7 @@
                     <div class="inner">
                         <div class="bd">
                             <span class="language">
-                                <a href="/relationship/">简体</a>
+                                <a href="index.html">简体</a>
                                 <span>/</span>
                                 <a class="active" href="zh-HK.html">繁體</a>
                             </span>
@@ -41,6 +41,7 @@
                                 <span>Github</span>
                             </a>
                             <a class="btn" href="/">個人網站</a>
+                            <a class="btn" href="/"></a>
                         </div>
                     </div>
                 </div>
@@ -277,6 +278,12 @@
                                             <p class="q">舅公和爺爺是什麼關系？</p>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div id="history-sidebar">
+                                <div class="c-hd">
+                                    <h2><span class="name">歷史結果</span>
+                                    <ul id="history-list"></ul>
                                 </div>
                             </div>
                         </div>
@@ -583,6 +590,79 @@
                 relationship.setMode(key,relationshipMode[key]['data']);
             }
 
+            // 保留歷史結果
+            (function(){
+                let historyRecords = [];
+                const $historyList = document.getElementById('history-list');
+
+                function addToHistory(type, input, result) {
+                    historyRecords.unshift({
+                        timestamp: new Date().toLocaleString(),
+                        type: type,     // 記錄類型
+                        input: input,   // 輸入參數
+                        result: result  // 計算結果
+                    });
+                    if (historyRecords.length > 8) historyRecords.pop();
+                    localStorage.setItem('calculationHistory', JSON.stringify(historyRecords));
+                    renderHistory();
+                }
+
+                function renderHistory() {
+                    $historyList.innerHTML = '';
+                    historyRecords.forEach((record, index) => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <strong>${index + 1}.</strong> [${record.type}] ${record.result}
+                            <br><small>${record.input}</small>
+                        `;
+                        li.addEventListener('click', () => {
+                            handleHistoryClick(record);
+                        });
+                        $historyList.appendChild(li);
+                    });
+                }
+
+                function handleHistoryClick(record) {
+                    switch (record.type) {
+                        case '關係找稱呼':
+                        {
+                            document.querySelector('.mod-panel .c-panel:nth-child(1) textarea[name="input"]').value = record.input;
+                            break;
+                        }
+                        case '稱呼找關係':
+                        {
+                            document.querySelector('.mod-panel .c-panel:nth-child(2) input[name="input"]').value = record.input;
+                            break;
+                        }
+                        case '兩者間稱呼':
+                        {
+                            const [person, target] = record.input.split(' → ');
+                            document.querySelector('.mod-panel .c-panel:nth-child(3) input[name="person"]').value = person;
+                            document.querySelector('.mod-panel .c-panel:nth-child(3) input[name="target"]').value = target;
+                            break;
+                        }
+                        case '兩者的稱呼':
+                        {
+                            const [person, target] = record.input.split(' ↔ ');
+                            document.querySelector('.mod-panel .c-panel:nth-child(4) input[name="person"]').value = person;
+                            document.querySelector('.mod-panel .c-panel:nth-child(4) input[name="target"]').value = target;
+                            break;
+                        }
+                            
+                    }
+                    const $panel = document.querySelector(`.c-panel:nth-child(${getPanelIndex(record.type)})`);
+                    $panel.querySelector('.btn-green').click();
+                }
+
+                function getPanelIndex(type) {
+                    const types = ['關係找稱呼', '稱呼找關係', '兩者間稱呼', '兩者的稱呼'];
+                    return types.indexOf(type) + 1;
+                }
+
+                renderHistory();
+                window.addToHistory = addToHistory;
+            })();
+
             // 標籤頁
             (function(){
                 var $module = document.querySelector('.mod-panel');
@@ -635,6 +715,7 @@
                         $result.value = '';
                         if(result.length){
                             $result.value = result.join('\n');
+                            addToHistory('關係找稱呼', value, result.join(', '));
                         }else{
                             $result.value = '貌似他/她跟你不是很熟哦!';
                         }
@@ -738,6 +819,7 @@
                         var result = relationship({text:value,type:'chain'});
                         if(result.length){
                             $result.value = result.join('\n');
+                            addToHistory('稱呼找關係', value, result.join(', '));
                         }else{
                             $result.value = '貌似他/她跟你不是很熟哦!';
                         }
@@ -773,6 +855,7 @@
                         var result = relationship({text:person,target:target,optimal:$optimal[0].checked});
                         if(result.length){
                             $result.value = result.join('\n');
+                            addToHistory('兩者間稱呼', `${person} → ${target}`, result.join(', '));
                         }else{
                             $result.value = '他們貌似不是很熟哦!';
                         }
@@ -809,6 +892,7 @@
                         var result = relationship({text:person,target:target,type:'pair',optimal:$optimal[0].checked});
                         if(result.length){
                             $result.value = result.join('\n');
+                            addToHistory('兩者的稱呼', `${person} ↔ ${target}`, result.join(', '));
                         }else{
                             $result.value = '未找到合稱!';
                         }

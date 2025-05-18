@@ -1,0 +1,98 @@
+|   babel.config.js
+|   favicon.ico
+|   gulpfile.js
+|   index.html
+|   LICENSE
+|   package-lock.json
+|   package.json
+|   project_structure.txt
+|   readme.md
+|   rollup.config.mjs
+|   vercel.json
+|   zh-HK.html
+|   
++---dist
+|   |   relationship-mode.min.js
+|   |   relationship-mode.min.mjs
+|   |   relationship.min.js
+|   |   relationship.min.mjs
+|   |   
+|   \---lang
+|           relationship-mode.zh-HK.min.js
+|           relationship-mode.zh-HK.min.mjs
+|           relationship.zh-HK.min.js
+|           relationship.zh-HK.min.mjs
+|   
++---src
+|   |   relationship-mode.js
+|   |   relationship.js
+|   |   
+|   +---locale
+|   |       guangdong.js
+|   |       north.js
+|   |       
+|   \---module
+|       |   cache.js
+|       |   id.js
+|       |   map.js
+|       |   mode.js
+|       |   options.js
+|       |   selector.js
+|       |   unit.js
+|       |   
+|       +---data
+|       |       branch.js
+|       |       input.js
+|       |       main.js
+|       |       multiple.js
+|       |       pair.js
+|       |       prefix.js
+|       |       sort.js
+|       |       
+|       \---rule
+|               expression.js
+|               filter.js
+|               replace.js
+|               similar.js
+|               
++---static
+|   +---image
+|   |   |   app.png
+|   |   |   bg.svg
+|   |   |   icon-gotop.png
+|   |   |   icon-wechat.png
+|   |   |   qrcode-alipay.jpg
+|   |   |   qrcode-wechat.jpg
+|   |   |   qrcode.jpg
+|   |   |   qrcode.png
+|   |   |   scan.png
+|   |   |   summary-bg.svg
+|   |   |   
+|   |   +---draw
+|   |   |       1.svg
+|   |   |       2.svg
+|   |   |       3.svg
+|   |   |       4.svg
+|   |   |       
+|   |   \---icon
+|   |           miui.png
+|   |           qinqi.png
+|   |           quanneng.png
+|   |           yuwendaren.png
+|   |           
+|   +---script
+|   |       index.js
+|   |       
+|   \---style
+|           index.css
+|           
++---test
+|       index.js
+|       
+\---vue
+    |   index.html
+    |   
+    \---assets
+            favicon-CcRSb4Ef.ico
+            index-BiHcNiMB.js
+            index-Bqz9Bu5y.css
