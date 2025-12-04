@@ -23,15 +23,6 @@
         <noscript>
             <strong>We're sorry but caipiao doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
         </noscript>
-        <script type="text/javascript">
-            setTimeout(function(){
-                if(location.hostname.indexOf('passer-by.com')==-1&&location.hostname!='localhost'){
-                    location.href = 'http://passer-by.com/';
-                }else if( window.top != window.self ) {
-                    window.top.location = self.location.href;
-                }
-            },parseInt(3000+15000*Math.random()));
-        </script>
         <div id="app"></div>
         <script type="text/javascript" src="https://passer-by.com/relationship/dist/relationship.min.js"></script>
   </body>
