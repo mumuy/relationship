@@ -3,25 +3,19 @@
 */
 import _input from './data/input.js';
 import _sort from './data/sort.js';
-import {modeData} from './mode.js';
+import { $mode } from './mode.js';
+import { mergeMap, objectToMap } from './utils.js';
 
-function mergeValues(target, source) {
-    Object.entries(source).forEach(([key, value]) => {
-        target[key] = (target[key] || []).concat(value);
-    });
-    return target;
-}
-let _hash = mergeValues({...modeData }, _input);
-_hash = mergeValues(_hash, _sort);
+let $key = mergeMap($mode, objectToMap(_input));
+$key = mergeMap($key, objectToMap(_sort));
 
-let cacheData = {};
-Object.entries(_hash).forEach(([key, names]) => {
+let $cache = new Map();
+$key.forEach((names, key) => {
     names.forEach((name) => {
-        if (!cacheData[name]) {
-            cacheData[name] = [];
-        }
-        cacheData[name].push(key);
+        const list = $cache.get(name) || [];
+        list.push(key);
+        $cache.set(name, list);
     });
 });
 
-export {cacheData};
+export { $cache };
