@@ -73,7 +73,7 @@ const mateMap = {
 
 const nameSet = new Set([...$map.values()].flat());
 
-$map.keys().forEach(function(key){
+$map.forEach(function(value, key){
     if (key.match(/^[fm]/) || key.match(/^[olx][bs]$|^[olx][bs],[^mf]/)) {
         for (const k in mateMap) {
             let newKey = k + ',' + key;
