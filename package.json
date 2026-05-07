@@ -59,7 +59,7 @@
         "@babel/runtime": "^7.26.0",
         "@rollup/plugin-babel": "^6.0.4",
         "@rollup/plugin-node-resolve": "^15.3.0",
-        "@rollup/plugin-terser": "^0.4.4",
+        "@rollup/plugin-terser": "^1.0.0",
         "gulp": "^5.0.0",
         "gulp-cht": "^2.0.20",
         "gulp-rename": "^2.0.0",
