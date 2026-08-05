@@ -1,0 +1,45 @@
+name: Discord PR Merged Notification
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  notify-discord:
+    # 核心判断：只有当 PR 状态是 closed 且 merged 为 true 时才触发
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send notification to Discord
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{
+                 "embeds": [{
+                   "title": "🔀 PR Successfully Merged! #'${{ github.event.pull_request.number }}'",
+                   "description": "**['${{ github.event.pull_request.title }}']('${{ github.event.pull_request.html_url }}')**",
+                   "color": 8359053,
+                   "fields": [
+                     {
+                       "name": "📦 Repository",
+                       "value": "`'${{ github.repository }}'`",
+                       "inline": true
+                     },
+                     {
+                       "name": "👤 Merged By",
+                       "value": "'${{ github.actor }}'",
+                       "inline": true
+                     },
+                     {
+                       "name": "🔀 Branch",
+                       "value": "`'${{ github.event.pull_request.head.ref }}'` ➔ `'${{ github.event.pull_request.base.ref }}'`",
+                       "inline": false
+                     }
+                   ],
+                   "footer": {
+                     "text": "GitHub Action Notification"
+                   }
+                 }]
+               }' \
+               ${{ secrets.DISCORD_WEBHOOK }}
