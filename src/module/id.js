@@ -106,22 +106,29 @@ export function getItemsById(id) {
         id = id.replace(/&\d+/g, '');
         if (_sort[id]) {
             items.push(_sort[id][0].replace('几', zh));
-        } else if ($mode.has(id)) {
-            const gen = getGenById(id);
-            let item = '';
-            if (gen < 3 && !id.match(/[hw],/)) {
-                $mode.get(id).forEach(function (name) {
-                    if (!item && name.includes('几')) {
-                        item = name.replace('几', zh);
-                    }
-                });
-                if (!item) {
-                    item = $mode.get(id)[0];
-                    item = item.match(/^[大小]/) ? item.replace(/^[大小]/, zh) : zh + item;
-                }
+        } else{
+            let list = $mode.get(id) || [];
+            if(!list.length) {
+                id = id.replace(/[ol](?=[s|b])/g, 'x');
+                list = $mode.get(id) || [];
             }
-            items.push(item);
-        }
+            if (list.length) {
+                const gen = getGenById(id);
+                let item = '';
+                if (gen < 4 && !id.match(/[hw],/)) {
+                    $mode.get(id).forEach(function (name) {
+                        if (!item && name.includes('几')) {
+                            item = name.replace('几', zh);
+                        }
+                    });
+                    if (!item) {
+                        item = $mode.get(id)[0];
+                        item = item.match(/^[大小]/) ? item.replace(/^[大小]/, zh) : zh + item;
+                    }
+                }
+                items.push(item);
+            }
+        } 
     }
     // 直接匹配称呼
     if (!items.length) {
